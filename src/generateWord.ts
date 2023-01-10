@@ -7,42 +7,52 @@ const DRIVER = [
   {
     image: '/1.png',
     name: 'โตโน่',
+    sound: '/1.mp3'
   },
   {
     image: '/2.png',
     name: 'ตัวตึงเยาวราช',
+    sound: '/2.mp3'
   },
   {
     image: '/3.png',
     name: 'ตัวตึงระยอง',
+    sound: '/3.mp3'
   },
   {
     image: '/4.png',
     name: 'ช่างแอร์ในตำนาน',
+    sound: '/4.mp3'
   },
   {
     image: '/5.png',
     name: 'ทีมแบกโลง',
+    sound: '/5.mp3'
   },
   {
     image: '/6.png',
     name: 'พี่แซมม',
+    sound: '/6.mp3'
   },
   {
     image: '/7.png',
     name: 'จุ๊มเหม่งมีอะไร',
+    sound: '/7.mp3'
   },
   {
     image: '/8.png',
-    name: 'ป้าพรชัย',
+    name: 'พี่ธรที่รักและเคารพของน้องๆ',
+    sound: '/8.mp3'
   },
   {
     image: '/9.png',
-    name: 'พรี่เอ๋',
+    name: 'นุ้งป้อม',
+    sound: '/9.mp3'
   },
   {
     image: '/10.png',
     name: '...',
+    sound: '/10.mp3'
   },
 ]
 
@@ -66,6 +76,7 @@ export const generateWord = (input: Array<string>, numberOfSet: number) => {
       [currentObjectName]: {
         name: shuffleDriver[modIndex].name,
         image: shuffleDriver[modIndex].image,
+        sound: shuffleDriver[modIndex].sound,
         value: [cur]
       }
     }

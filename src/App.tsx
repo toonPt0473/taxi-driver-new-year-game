@@ -35,7 +35,6 @@ function App() {
       setCurrentSet(null);
     }
   };
-  console.log(wordSet);
   if (currentSet === null) {
     return (
       <div style={{ position: "relative", paddingTop: 40 }}>
@@ -62,7 +61,7 @@ function App() {
               <button
                 style={{ width: "40%", textAlign: "center" }}
                 onClick={() => handleClickSet(value.name)}
-                disabled={!!value.point}
+                disabled={value.point !== undefined}
               >
                 <img
                   src={value.image}
@@ -80,7 +79,8 @@ function App() {
                     margin: 0,
                   }}
                 >
-                  {value.name} {value.point ? `  (${value.point} point)` : ""}
+                  {value.name}{" "}
+                  {value.point !== undefined ? `  (${value.point} point)` : ""}
                 </p>
               </button>
             );
@@ -108,6 +108,7 @@ function App() {
         wordSet={wordSet[currentSet].value}
         onGameEnd={handleGameEnd}
         onBack={() => setCurrentSet(null)}
+        sound={wordSet[currentSet].sound}
       />
     </div>
   );

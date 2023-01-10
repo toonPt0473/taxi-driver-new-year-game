@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Fireworks } from "@fireworks-js/react";
 import { SwipeZone } from "./SwipeZone";
 import { Direction } from "./type";
@@ -6,6 +6,7 @@ import "./App.css";
 
 interface GameZoneProps {
   wordSet: Array<string>;
+  sound: string;
   onGameEnd: (point: number) => void;
   onBack: () => void;
 }
@@ -17,17 +18,38 @@ enum GameStateType {
 }
 
 let interval: number | undefined;
+const GAME_TIME = 5;
 
-export const GameZone: FC<GameZoneProps> = ({ wordSet, onGameEnd, onBack }) => {
+const countSound = new Audio(
+  "http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/eatpellet.ogg"
+);
+const endSound = new Audio(
+  "https://assets.mixkit.co/sfx/preview/mixkit-arcade-retro-game-over-213.mp3"
+);
+
+export const GameZone: FC<GameZoneProps> = ({
+  wordSet,
+  onGameEnd,
+  onBack,
+  sound,
+}) => {
+  const musicSound = new Audio(sound);
   const [gameState, setGameState] = useState<GameStateType>(GameStateType.INIT);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [point, setPoint] = useState(0);
-  const [gameTime, setGameTime] = useState(5);
+  const [gameTime, setGameTime] = useState(GAME_TIME);
   const handleStart = () => {
+    musicSound.pause();
     setPoint(0);
     setGameState(GameStateType.RUNNING);
     interval = setInterval(() => {
       setGameTime((time) => {
+        if (time <= 6 && time > 1) {
+          countSound.play();
+        }
+        if (time === 1) {
+          endSound.play();
+        }
         if (time === 0) {
           setGameState(GameStateType.OVER);
           clearInterval(interval);
@@ -43,6 +65,13 @@ export const GameZone: FC<GameZoneProps> = ({ wordSet, onGameEnd, onBack }) => {
     }
     setCurrentWordIndex((w) => w + 1);
   };
+  useEffect(() => {
+    musicSound.play();
+    return () => {
+      musicSound.pause();
+    };
+  }, []);
+
   return (
     <>
       <div
@@ -57,7 +86,7 @@ export const GameZone: FC<GameZoneProps> = ({ wordSet, onGameEnd, onBack }) => {
         }}
       >
         <button onClick={onBack}>Back</button>
-        <p>current time: {gameTime}</p>
+        <p>Time left: {gameTime}</p>
       </div>
       <div>
         {gameState === GameStateType.INIT && (

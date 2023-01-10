@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { Direction } from "./type";
 
-const threshold = 10;
+const threshold = 5;
 
 interface SwipeZoneProps {
   handleTouched: (direction: Direction) => void;

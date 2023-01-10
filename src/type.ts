@@ -11,4 +11,5 @@ export interface WordSetType {
   name: string;
   image: string;
   point?: number;
+  sound: string;
 }
