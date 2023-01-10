@@ -3,8 +3,6 @@ import { initialLocalWord, setNewWordSet, WORD_SET_KEY } from "./generateWord";
 import { GameZone } from "./GameZone";
 import { WordSetType } from "./type";
 
-import "swiper/css";
-
 function App() {
   const [wordSet, setWordSet] = useState<Record<string, WordSetType>>(
     initialLocalWord()

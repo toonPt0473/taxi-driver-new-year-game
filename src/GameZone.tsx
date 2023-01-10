@@ -17,6 +17,8 @@ enum GameStateType {
   OVER = "over",
 }
 
+const randomColor = () => Math.floor(Math.random() * 16777215).toString(16);
+
 let interval: number | undefined;
 const GAME_TIME = 60;
 
@@ -36,6 +38,7 @@ export const GameZone: FC<GameZoneProps> = ({
   const musicSound = new Audio(sound);
   const [gameState, setGameState] = useState<GameStateType>(GameStateType.INIT);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [bg, setBg] = useState(randomColor());
   const [point, setPoint] = useState(0);
   const [gameTime, setGameTime] = useState(GAME_TIME);
   const handleStart = () => {
@@ -64,6 +67,7 @@ export const GameZone: FC<GameZoneProps> = ({
       setPoint((p) => p + 1);
     }
     setCurrentWordIndex((w) => w + 1);
+    setBg(randomColor());
   };
   useEffect(() => {
     musicSound.play();
@@ -73,7 +77,17 @@ export const GameZone: FC<GameZoneProps> = ({
   }, []);
 
   return (
-    <>
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        overflow: "hidden",
+        background: `#${bg}`,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <div
         style={{
           display: "flex",
@@ -86,15 +100,27 @@ export const GameZone: FC<GameZoneProps> = ({
         }}
       >
         <button onClick={onBack}>Back</button>
-        <p>Time left: {gameTime}</p>
+        <p
+          style={{ background: "black", padding: "10px 20px", borderRadius: 8 }}
+        >
+          Time left: {gameTime}
+        </p>
       </div>
       <div>
         {gameState === GameStateType.INIT && (
           <button onClick={handleStart}>Start Game</button>
         )}
         {gameState === GameStateType.RUNNING && (
-          <div style={{ maxHeight: "70vh" }}>
-            <p>{wordSet[currentWordIndex]}</p>
+          <div
+            style={{
+              background: "white",
+              padding: "10px 20px",
+              color: "black",
+            }}
+          >
+            <p style={{ fontSize: 68, margin: 0, lineHeight: "80px" }}>
+              {wordSet[currentWordIndex]}
+            </p>
             <SwipeZone handleTouched={handleSwipe} />
           </div>
         )}
@@ -127,7 +153,7 @@ export const GameZone: FC<GameZoneProps> = ({
           </>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
