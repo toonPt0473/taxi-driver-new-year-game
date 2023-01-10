@@ -20,7 +20,7 @@ enum GameStateType {
 const randomColor = () => Math.floor(Math.random() * 16777215).toString(16);
 
 let interval: number | undefined;
-const GAME_TIME = 60;
+const GAME_TIME = 30;
 
 const countSound = new Audio(
   "http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/eatpellet.ogg"
@@ -38,7 +38,7 @@ export const GameZone: FC<GameZoneProps> = ({
   const musicSound = new Audio(sound);
   const [gameState, setGameState] = useState<GameStateType>(GameStateType.INIT);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [bg, setBg] = useState(randomColor());
+  const [bg, setBg] = useState(`#${randomColor()}`);
   const [point, setPoint] = useState(0);
   const [gameTime, setGameTime] = useState(GAME_TIME);
   const handleStart = () => {
@@ -55,6 +55,7 @@ export const GameZone: FC<GameZoneProps> = ({
         }
         if (time === 0) {
           setGameState(GameStateType.OVER);
+          setBg("transparent");
           clearInterval(interval);
           return time;
         }
@@ -67,7 +68,7 @@ export const GameZone: FC<GameZoneProps> = ({
       setPoint((p) => p + 1);
     }
     setCurrentWordIndex((w) => w + 1);
-    setBg(randomColor());
+    setBg(`#${randomColor()}`);
   };
   useEffect(() => {
     musicSound.play();
@@ -82,7 +83,7 @@ export const GameZone: FC<GameZoneProps> = ({
         width: "100%",
         height: "100%",
         overflow: "hidden",
-        background: `#${bg}`,
+        background: bg,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
