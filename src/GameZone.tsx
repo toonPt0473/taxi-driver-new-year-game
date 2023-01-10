@@ -18,7 +18,7 @@ enum GameStateType {
 }
 
 let interval: number | undefined;
-const GAME_TIME = 5;
+const GAME_TIME = 60;
 
 const countSound = new Audio(
   "http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/eatpellet.ogg"
@@ -93,10 +93,10 @@ export const GameZone: FC<GameZoneProps> = ({
           <button onClick={handleStart}>Start Game</button>
         )}
         {gameState === GameStateType.RUNNING && (
-          <>
+          <div style={{ maxHeight: "70vh" }}>
             <p>{wordSet[currentWordIndex]}</p>
             <SwipeZone handleTouched={handleSwipe} />
-          </>
+          </div>
         )}
 
         {gameState === GameStateType.OVER && (

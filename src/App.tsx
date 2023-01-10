@@ -39,7 +39,7 @@ function App() {
     return (
       <div style={{ position: "relative", paddingTop: 40 }}>
         <div style={{ position: "absolute", top: 0, right: 0 }}>
-          <button onClick={() => generateNewGroupSet(8)}>
+          <button onClick={() => generateNewGroupSet(12)}>
             generate new set
           </button>
         </div>
@@ -101,7 +101,6 @@ function App() {
         width: "100vw",
         height: "100vh",
         flexWrap: "wrap",
-        overflow: "auto",
       }}
     >
       <GameZone

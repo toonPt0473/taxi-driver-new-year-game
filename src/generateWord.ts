@@ -41,7 +41,7 @@ const DRIVER = [
   },
   {
     image: '/8.png',
-    name: 'พี่ธรที่รักและเคารพของน้องๆ',
+    name: 'วัยรุ่นฟันน้ำนมป้ายแดง',
     sound: '/8.mp3'
   },
   {
@@ -53,6 +53,16 @@ const DRIVER = [
     image: '/10.png',
     name: '...',
     sound: '/10.mp3'
+  },
+  {
+    image: '/11.png',
+    name: 'แฟนพันแท้ลิเวอร์พูล',
+    sound: '/11.mp3'
+  },
+  {
+    image: '/12.png',
+    name: 'พี่ตั้มเดฟ',
+    sound: '/12.mp3'
   },
 ]
 
@@ -83,7 +93,7 @@ export const generateWord = (input: Array<string>, numberOfSet: number) => {
   }, ({} as Record<string, WordSetType>))
 }
 
-export const setNewWordSet = (numberOfSet: number = 8) => {
+export const setNewWordSet = (numberOfSet: number = 12) => {
   const newWordSet = generateWord(source, numberOfSet)
   localStorage.setItem(WORD_SET_KEY, JSON.stringify(newWordSet))
   return newWordSet
