@@ -16,9 +16,9 @@ enum GameStateType {
   OVER = "over",
 }
 
-let interval;
+let interval: number | undefined;
 
-export const GameZone: FC<GameZoneProps> = ({ wordSet, onGameEnd }) => {
+export const GameZone: FC<GameZoneProps> = ({ wordSet, onGameEnd, onBack }) => {
   const [gameState, setGameState] = useState<GameStateType>(GameStateType.INIT);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [point, setPoint] = useState(0);
@@ -56,7 +56,7 @@ export const GameZone: FC<GameZoneProps> = ({ wordSet, onGameEnd }) => {
           margin: "auto",
         }}
       >
-        <button onClick={onGameEnd}>Back</button>
+        <button onClick={onBack}>Back</button>
         <p>current time: {gameTime}</p>
       </div>
       <div>
