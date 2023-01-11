@@ -2,7 +2,7 @@ import source from './source.json'
 import { WordSetType } from './type'
 
 export const WORD_SET_KEY = 'word-set'
-export const NUMBER_OF_SET = 8
+export const NUMBER_OF_SET = 6
 const DRIVER = [
   {
     image: '/1.png',
@@ -43,11 +43,6 @@ const DRIVER = [
     image: '/8.png',
     name: 'วัยรุ่นฟันน้ำนมป้ายแดง',
     sound: '/8.mp3'
-  },
-  {
-    image: '/9.png',
-    name: 'นุ้งป้อม',
-    sound: '/9.mp3'
   },
   {
     image: '/10.png',
