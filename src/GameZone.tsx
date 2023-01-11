@@ -20,7 +20,7 @@ enum GameStateType {
 const randomColor = () => Math.floor(Math.random() * 16777215).toString(16);
 
 let interval: number | undefined;
-const GAME_TIME = 10;
+const GAME_TIME = 90;
 
 const countSound = new Audio(
   "http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/eatpellet.ogg"
@@ -112,7 +112,7 @@ export const GameZone: FC<GameZoneProps> = ({
       >
         <button
           onClick={onBack}
-          style={{ fontSize: 48, padding: "10px 20px", lineHeight: "60px" }}
+          style={{ fontSize: 32, padding: "10px 20px", lineHeight: "40px" }}
         >
           Back
         </button>
@@ -121,10 +121,10 @@ export const GameZone: FC<GameZoneProps> = ({
             background: "black",
             padding: "10px 20px",
             borderRadius: 8,
-            fontSize: 48,
+            fontSize: 32,
             margin: 0,
             marginBottom: 0,
-            lineHeight: "60px",
+            lineHeight: "40px",
           }}
         >
           Time left: {gameTime}
@@ -195,9 +195,9 @@ export const GameZone: FC<GameZoneProps> = ({
               <button
                 onClick={() => onGameEnd(point)}
                 style={{
-                  fontSize: 48,
+                  fontSize: 32,
                   padding: "10px 20px",
-                  lineHeight: "60px",
+                  lineHeight: "40px",
                 }}
               >
                 DONE
