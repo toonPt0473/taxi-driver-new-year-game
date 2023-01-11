@@ -204,8 +204,18 @@ export const GameZone: FC<GameZoneProps> = ({
             <p style={{ fontSize: 56, margin: 0, lineHeight: "70px" }}>
               <span style={{ fontSize: 24 }}>Current Point: {point}</span>
               <br />
-              คำใบ้หมดแล้วจ้าา
+              คำใบ้หมดแล้วจ้าาา..
             </p>
+            <button
+              onClick={() => onGameEnd(point)}
+              style={{
+                fontSize: 32,
+                padding: "10px 20px",
+                lineHeight: "40px",
+              }}
+            >
+              DONE
+            </button>
           </div>
         )}
 

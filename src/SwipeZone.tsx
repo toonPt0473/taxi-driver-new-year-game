@@ -53,6 +53,37 @@ export const SwipeZone: React.FC<SwipeZoneProps> = ({ handleTouched }) => {
       }
     }
   };
+  if (import.meta.env.VITE_GAME_CONTROL_MODE === "button") {
+    return (
+      <div
+        style={{
+          position: "absolute",
+          bottom: 16,
+          left: 16,
+          right: 16,
+          zIndex: 10,
+          background: "transparent",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          margin: "auto",
+        }}
+      >
+        <button
+          style={{ width: 150 }}
+          onClick={() => handleTouched(Direction.RIGHT)}
+        >
+          SKIP
+        </button>
+        <button
+          style={{ width: 150 }}
+          onClick={() => handleTouched(Direction.LEFT)}
+        >
+          CORRECT
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div
