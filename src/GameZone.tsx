@@ -30,7 +30,7 @@ const random = (array: Array<string>) => {
 const randomColor = () => Math.floor(Math.random() * 16777215).toString(16);
 
 let interval: number | undefined;
-const GAME_TIME = 5;
+const GAME_TIME = 180;
 
 const countSound = new Audio(
   "http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/eatpellet.ogg"
@@ -64,6 +64,7 @@ export const GameZone: FC<GameZoneProps> = ({
   };
   const handleStart = () => {
     musicSound.pause();
+    musicSound.currentTime = 0;
     setPoint(0);
     setGameState(GameStateType.RUNNING);
     interval = setInterval(() => {
@@ -75,6 +76,7 @@ export const GameZone: FC<GameZoneProps> = ({
           endSound.play();
         }
         if (time === 0) {
+          musicSound.play();
           setGameState(GameStateType.OVER);
           setBg("transparent");
           clearInterval(interval);
