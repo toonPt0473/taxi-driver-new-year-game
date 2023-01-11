@@ -66,18 +66,21 @@ export const GameZone: FC<GameZoneProps> = ({
     }, 1000);
   };
   const handleSwipe = (direction: Direction) => {
-    if (direction === Direction.RIGHT || direction === Direction.LEFT) {
+    if (direction === Direction.LEFT) {
       setPoint((p) => p + 1);
       correctSound.pause();
       correctSound.currentTime = 0;
       correctSound.play();
-    } else {
+      setCurrentWordIndex((w) => w + 1);
+      setBg(`#${randomColor()}`);
+    }
+    if (direction === Direction.RIGHT) {
       skipSound.pause();
       skipSound.currentTime = 0;
       skipSound.play();
+      setCurrentWordIndex((w) => w + 1);
+      setBg(`#${randomColor()}`);
     }
-    setCurrentWordIndex((w) => w + 1);
-    setBg(`#${randomColor()}`);
   };
   useEffect(() => {
     musicSound.play();
