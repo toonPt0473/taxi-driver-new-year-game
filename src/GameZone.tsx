@@ -54,10 +54,10 @@ export const GameZone: FC<GameZoneProps> = ({
   const [point, setPoint] = useState(0);
   const [gameTime, setGameTime] = useState(GAME_TIME);
   const getPointImage = () => {
-    if (point <= 2) {
+    if (point <= 5) {
       return random(IMAGE_POINT.bad);
     }
-    if (point <= 5) {
+    if (point <= 8) {
       return random(IMAGE_POINT.good);
     }
     return random(IMAGE_POINT.wow);
