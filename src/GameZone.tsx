@@ -20,7 +20,7 @@ enum GameStateType {
 const randomColor = () => Math.floor(Math.random() * 16777215).toString(16);
 
 let interval: number | undefined;
-const GAME_TIME = 90;
+const GAME_TIME = 10;
 
 const countSound = new Audio(
   "http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/eatpellet.ogg"
@@ -122,6 +122,8 @@ export const GameZone: FC<GameZoneProps> = ({
             padding: "10px 20px",
             borderRadius: 8,
             fontSize: 48,
+            margin: 0,
+            marginBottom: 0,
             lineHeight: "60px",
           }}
         >
@@ -145,7 +147,7 @@ export const GameZone: FC<GameZoneProps> = ({
               color: "black",
             }}
           >
-            <p style={{ fontSize: 80, margin: 0, lineHeight: "100px" }}>
+            <p style={{ fontSize: 56, margin: 0, lineHeight: "70px" }}>
               {wordSet[currentWordIndex]}
             </p>
             <SwipeZone handleTouched={handleSwipe} />
@@ -159,7 +161,7 @@ export const GameZone: FC<GameZoneProps> = ({
               color: "black",
             }}
           >
-            <p style={{ fontSize: 80, margin: 0, lineHeight: "100px" }}>
+            <p style={{ fontSize: 56, margin: 0, lineHeight: "70px" }}>
               คำใบ้หมดแล้วจ้าา
             </p>
           </div>
