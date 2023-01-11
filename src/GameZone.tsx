@@ -120,7 +120,7 @@ export const GameZone: FC<GameZoneProps> = ({
         >
           Back
         </button>
-        <p
+        <button
           style={{
             padding: "10px 20px",
             borderRadius: 8,
@@ -131,7 +131,7 @@ export const GameZone: FC<GameZoneProps> = ({
           }}
         >
           Time left: {gameTime}
-        </p>
+        </button>
       </div>
       <div>
         {gameState === GameStateType.INIT && (
@@ -150,7 +150,16 @@ export const GameZone: FC<GameZoneProps> = ({
               color: "black",
             }}
           >
-            <p style={{ fontSize: 56, margin: 0, lineHeight: "70px" }}>
+            <p
+              style={{
+                fontSize: 56,
+                margin: 0,
+                lineHeight: "70px",
+                textAlign: "center",
+              }}
+            >
+              <span style={{ fontSize: 24 }}>Current Point: {point}</span>
+              <br />
               {wordSet[currentWordIndex]}
             </p>
             <SwipeZone handleTouched={handleSwipe} />
