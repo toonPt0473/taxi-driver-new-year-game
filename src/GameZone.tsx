@@ -17,10 +17,20 @@ enum GameStateType {
   OVER = "over",
 }
 
+const IMAGE_POINT = {
+  bad: ["/bad1.gif", "/bad2.gif"],
+  good: ["/good1.gif", "/good2.gif", "/good3.gif"],
+  wow: ["/wow1.gif", "/wow2.gif", "/wow3.gif"],
+};
+
+const random = (array: Array<string>) => {
+  return array[Math.floor(Math.random() * array.length)];
+};
+
 const randomColor = () => Math.floor(Math.random() * 16777215).toString(16);
 
 let interval: number | undefined;
-const GAME_TIME = 180;
+const GAME_TIME = 5;
 
 const countSound = new Audio(
   "http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/eatpellet.ogg"
@@ -43,6 +53,15 @@ export const GameZone: FC<GameZoneProps> = ({
   const [bg, setBg] = useState(`#${randomColor()}`);
   const [point, setPoint] = useState(0);
   const [gameTime, setGameTime] = useState(GAME_TIME);
+  const getPointImage = () => {
+    if (point <= 2) {
+      return random(IMAGE_POINT.bad);
+    }
+    if (point <= 5) {
+      return random(IMAGE_POINT.good);
+    }
+    return random(IMAGE_POINT.wow);
+  };
   const handleStart = () => {
     musicSound.pause();
     setPoint(0);
@@ -136,11 +155,15 @@ export const GameZone: FC<GameZoneProps> = ({
           Time left: {gameTime}
         </button>
       </div>
-      <div>
+      <div style={{ width: "100%", textAlign: "center" }}>
         {gameState === GameStateType.INIT && (
           <button
             onClick={handleStart}
-            style={{ fontSize: 48, padding: "10px 20px", lineHeight: "60px" }}
+            style={{
+              fontSize: 48,
+              padding: "10px 20px",
+              lineHeight: "60px",
+            }}
           >
             Start Game
           </button>
@@ -185,7 +208,7 @@ export const GameZone: FC<GameZoneProps> = ({
         )}
 
         {gameState === GameStateType.OVER && (
-          <>
+          <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
             <Fireworks
               options={{
                 rocketsPoint: {
@@ -205,7 +228,24 @@ export const GameZone: FC<GameZoneProps> = ({
                 zIndex: -1,
               }}
             />
-            <div style={{ textAlign: "center" }}>
+
+            <div
+              style={{
+                textAlign: "center",
+                backgroundImage: `url("${getPointImage()}")`,
+                backgroundSize: "contain",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                flex: 1,
+                height: 200,
+              }}
+            ></div>
+            <div
+              style={{
+                textAlign: "center",
+                flex: 1,
+              }}
+            >
               <p style={{ fontSize: 48, lineHeight: "60px" }}>
                 Your Point: {point}
               </p>
@@ -220,7 +260,7 @@ export const GameZone: FC<GameZoneProps> = ({
                 DONE
               </button>
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>
