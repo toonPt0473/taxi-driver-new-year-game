@@ -177,6 +177,8 @@ export const GameZone: FC<GameZoneProps> = ({
             }}
           >
             <p style={{ fontSize: 56, margin: 0, lineHeight: "70px" }}>
+              <span style={{ fontSize: 24 }}>Current Point: {point}</span>
+              <br />
               คำใบ้หมดแล้วจ้าา
             </p>
           </div>
