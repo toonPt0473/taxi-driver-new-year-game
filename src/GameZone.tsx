@@ -20,7 +20,7 @@ enum GameStateType {
 const randomColor = () => Math.floor(Math.random() * 16777215).toString(16);
 
 let interval: number | undefined;
-const GAME_TIME = 30;
+const GAME_TIME = 90;
 
 const countSound = new Audio(
   "http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/eatpellet.ogg"
@@ -28,6 +28,8 @@ const countSound = new Audio(
 const endSound = new Audio(
   "https://assets.mixkit.co/sfx/preview/mixkit-arcade-retro-game-over-213.mp3"
 );
+const correctSound = new Audio("/correct.mp3");
+const skipSound = new Audio("/skip.mp3");
 
 export const GameZone: FC<GameZoneProps> = ({
   wordSet,
@@ -66,6 +68,13 @@ export const GameZone: FC<GameZoneProps> = ({
   const handleSwipe = (direction: Direction) => {
     if (direction === Direction.RIGHT || direction === Direction.LEFT) {
       setPoint((p) => p + 1);
+      correctSound.pause();
+      correctSound.currentTime = 0;
+      correctSound.play();
+    } else {
+      skipSound.pause();
+      skipSound.currentTime = 0;
+      skipSound.play();
     }
     setCurrentWordIndex((w) => w + 1);
     setBg(`#${randomColor()}`);
@@ -98,20 +107,51 @@ export const GameZone: FC<GameZoneProps> = ({
           top: 0,
           width: "90%",
           margin: "auto",
+          zIndex: 100,
         }}
       >
-        <button onClick={onBack}>Back</button>
+        <button
+          onClick={onBack}
+          style={{ fontSize: 48, padding: "10px 20px", lineHeight: "60px" }}
+        >
+          Back
+        </button>
         <p
-          style={{ background: "black", padding: "10px 20px", borderRadius: 8 }}
+          style={{
+            background: "black",
+            padding: "10px 20px",
+            borderRadius: 8,
+            fontSize: 48,
+            lineHeight: "60px",
+          }}
         >
           Time left: {gameTime}
         </p>
       </div>
       <div>
         {gameState === GameStateType.INIT && (
-          <button onClick={handleStart}>Start Game</button>
+          <button
+            onClick={handleStart}
+            style={{ fontSize: 48, padding: "10px 20px", lineHeight: "60px" }}
+          >
+            Start Game
+          </button>
         )}
-        {gameState === GameStateType.RUNNING && (
+        {gameState === GameStateType.RUNNING && wordSet[currentWordIndex] && (
+          <div
+            style={{
+              background: "white",
+              padding: "20px 30px",
+              color: "black",
+            }}
+          >
+            <p style={{ fontSize: 80, margin: 0, lineHeight: "100px" }}>
+              {wordSet[currentWordIndex]}
+            </p>
+            <SwipeZone handleTouched={handleSwipe} />
+          </div>
+        )}
+        {gameState === GameStateType.RUNNING && !wordSet[currentWordIndex] && (
           <div
             style={{
               background: "white",
@@ -119,10 +159,9 @@ export const GameZone: FC<GameZoneProps> = ({
               color: "black",
             }}
           >
-            <p style={{ fontSize: 68, margin: 0, lineHeight: "80px" }}>
-              {wordSet[currentWordIndex]}
+            <p style={{ fontSize: 80, margin: 0, lineHeight: "100px" }}>
+              คำใบ้หมดแล้วจ้าา
             </p>
-            <SwipeZone handleTouched={handleSwipe} />
           </div>
         )}
 
@@ -148,8 +187,19 @@ export const GameZone: FC<GameZoneProps> = ({
               }}
             />
             <div style={{ textAlign: "center" }}>
-              <p>Your Point: {point}</p>
-              <button onClick={() => onGameEnd(point)}>DONE</button>
+              <p style={{ fontSize: 48, lineHeight: "60px" }}>
+                Your Point: {point}
+              </p>
+              <button
+                onClick={() => onGameEnd(point)}
+                style={{
+                  fontSize: 48,
+                  padding: "10px 20px",
+                  lineHeight: "60px",
+                }}
+              >
+                DONE
+              </button>
             </div>
           </>
         )}

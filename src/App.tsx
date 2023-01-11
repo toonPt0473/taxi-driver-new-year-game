@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { initialLocalWord, setNewWordSet, WORD_SET_KEY } from "./generateWord";
+import {
+  initialLocalWord,
+  setNewWordSet,
+  WORD_SET_KEY,
+  NUMBER_OF_SET,
+} from "./generateWord";
 import { GameZone } from "./GameZone";
 import { WordSetType } from "./type";
 
@@ -37,7 +42,7 @@ function App() {
     return (
       <div style={{ position: "relative", paddingTop: 40 }}>
         <div style={{ position: "absolute", top: 0, right: 0 }}>
-          <button onClick={() => generateNewGroupSet(12)}>
+          <button onClick={() => generateNewGroupSet(NUMBER_OF_SET)}>
             generate new set
           </button>
         </div>
@@ -78,7 +83,7 @@ function App() {
                   }}
                 >
                   {value.name}{" "}
-                  {value.point !== undefined ? `  (${value.point} point)` : ""}
+                  {value.point !== undefined ? `  (${value.point} คะแนน)` : ""}
                 </p>
               </button>
             );
